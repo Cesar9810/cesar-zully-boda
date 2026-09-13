@@ -84,11 +84,36 @@ p { line-height: 1.7; color: var(--text-secondary); max-width: 60ch; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+/* Ola decorativa entre secciones */
+.wave-divider {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  line-height: 0;
+  pointer-events: none;
+}
+.wave-divider svg { width: 100%; height: 60px; display: block; }
+
+/* Ramita decorativa de esquina */
+.corner-leaf {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 32px;
+  height: 32px;
+  fill: none;
+  stroke: var(--blue-primary);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  opacity: 0.75;
+  pointer-events: none;
+}
 
 /* ============================================
    LAYOUT GENERAL
    ============================================ */
-section { padding: 5.5rem 1.5rem; }
+section { padding: 5.5rem 1.5rem; position: relative; overflow: hidden; }
 .section-inner { max-width: 680px; margin: 0 auto; }
 .center { text-align: center; }
 @media (max-width: 600px) {
@@ -155,6 +180,7 @@ header {
   padding: 0.85rem 1.5rem; border-radius: var(--radius-pill);
   font-size: 0.9rem; font-weight: 500; box-shadow: var(--shadow); z-index: 40;
   white-space: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 @media (min-width: 860px) { .floating-rsvp { display: none; } }
 
@@ -288,19 +314,8 @@ header {
     margin: 0 auto 2rem;
   }
 
-  .dress-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
   .dress-col {
     padding: 0;
-  }
-
-  .dress-col + .dress-col {
-    border-left: none;
-    border-top: 1px solid var(--border);
-    padding-top: 2rem;
   }
 
 }
@@ -329,9 +344,22 @@ header {
 .closing { text-align: center; }
 .closing .display-xl { font-size: clamp(2rem, 7vw, 2.75rem); margin-bottom: 0.75rem; }
 
+.hero-landscape {
+  position: absolute;
+  bottom: 0; left: 0; width: 100%;
+  line-height: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-landscape svg { width: 100%; height: 220px; display: block; }
+.hero-content { position: relative; z-index: 2; }
+
 footer {
-  text-align: center; padding: 2.5rem 1.5rem 3rem;
-  color: var(--text-secondary); font-size: 0.8rem;
+  background: var(--blue-deep);
+  color: var(--white);
+  text-align: center;
+  padding: 2.5rem 1.5rem 3rem;
+  font-size: 0.8rem;
 }
 </style>
 </head>
@@ -358,17 +386,40 @@ footer {
 
   <!-- 01 — HERO -->
   <section id="hero" class="reveal">
-    <span class="display-xl">César <em>&amp;</em> Zully</span>
-    <p class="hero-greeting" id="heroGreeting">Nos encantaría compartir este día contigo.</p>
-    <div class="hero-meta">
-      <span>Nos casamos</span>
-      <span class="hero-date">14 de noviembre de 2026 · 5:30 PM</span>
-      <span>Finca Bella Vista, Sincelejo, Sucre</span>
+    <div class="hero-landscape" aria-hidden="true">
+      <svg viewBox="0 0 1440 400" preserveAspectRatio="none">
+        <path d="M0,400 L0,260 C200,200 350,280 500,230 C650,180 800,260 950,220 C1100,180 1250,240 1440,200 L1440,400 Z" fill="var(--blue-soft)" opacity="0.35"/>
+        <path d="M0,400 L0,310 C220,270 380,330 560,300 C740,270 900,330 1080,300 C1220,280 1340,310 1440,290 L1440,400 Z" fill="var(--blue-primary)" opacity="0.3"/>
+      </svg>
+    </div>
+  
+    <svg class="corner-leaf" viewBox="0 0 60 60" aria-hidden="true">
+      <path d="M12 48 Q28 32 46 12" fill="none"/>
+      <g transform="translate(18,40) rotate(-30) scale(0.28)"><path d="M0,-58 C8,-78 8,-96 0,-112 C-8,-96 -8,-78 0,-58 Z"/></g>
+      <g transform="translate(28,28) rotate(10) scale(0.3)"><path d="M0,-58 C8,-78 8,-96 0,-112 C-8,-96 -8,-78 0,-58 Z"/></g>
+      <g transform="translate(38,16) rotate(-50) scale(0.26)"><path d="M0,-58 C8,-78 8,-96 0,-112 C-8,-96 -8,-78 0,-58 Z"/></g>
+    </svg>
+  
+    <div class="hero-content">
+      <span class="display-xl">César <em>&amp;</em> Zully</span>
+      <p class="hero-greeting" id="heroGreeting">Nos encantaría compartir este día contigo.</p>
+      <div class="hero-meta">
+        <span>¡Nos casamos!</span>
+        <span class="hero-date">14 de noviembre de 2026 · 5:30 PM</span>
+        <span>Finca Bella Vista, Sincelejo, Sucre</span>
+      </div>
+    </div>
+  
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,40 C240,90 480,0 720,30 C960,60 1200,10 1440,50 L1440,100 L0,100 Z" fill="var(--background-alt)"></path>
+      </svg>
     </div>
   </section>
 
   <!-- 02 — RSVP -->
   <section id="rsvp" class="reveal">
+    
     <div class="section-inner card">
       <h2>¿Nos acompañas?</h2>
       <p class="center" style="margin:0 auto 1rem;">Estamos muy felices de compartir este día contigo.</p>
@@ -378,7 +429,7 @@ footer {
   </section>
 
   <!-- 03 — NUESTRA HISTORIA -->
-  <section id="historia" class="reveal">
+  <!-- <section id="historia" class="reveal">
     <div class="section-inner historia-center">
       <h2 class="center" style="margin-bottom:1.75rem;">Nuestra historia</h2>
       <svg class="wreath" viewBox="0 0 220 220" aria-hidden="true">
@@ -409,10 +460,17 @@ footer {
         la certeza de que apenas estamos empezando.
       </p>
     </div>
-  </section>
+  </section> -->
 
   <!-- VERSÍCULO -->
   <section id="versiculo" class="reveal">
+    <svg class="corner-leaf corner-leaf--bottom" viewBox="0 0 60 60" aria-hidden="true">
+      <path d="M12 48 Q28 32 46 12" fill="none"/>
+      <g transform="translate(18,40) rotate(-30) scale(0.28)"><path d="M0,-58 C8,-78 8,-96 0,-112 C-8,-96 -8,-78 0,-58 Z"/></g>
+      <g transform="translate(28,28) rotate(10) scale(0.3)"><path d="M0,-58 C8,-78 8,-96 0,-112 C-8,-96 -8,-78 0,-58 Z"/></g>
+      <g transform="translate(38,16) rotate(-50) scale(0.26)"><path d="M0,-58 C8,-78 8,-96 0,-112 C-8,-96 -8,-78 0,-58 Z"/></g>
+    </svg>
+
     <div class="section-inner center">
       <div class="divider">
         <svg width="20" height="20" viewBox="0 0 24 24" class="icon"><path d="M12 3c0 5-3 6-3 10a3 3 0 0 0 6 0c0-4-3-5-3-10Z"/><path d="M12 13v8"/></svg>
@@ -421,7 +479,13 @@ footer {
         "Es mejor ser dos que uno, porque ambos pueden ayudarse a lograr el éxito.
         Si uno cae, el otro puede darle la mano."
       </p>
-      <cite>Eclesiastés 4:9–10</cite>
+      Eclesiastés 4:9–10
+    </div>
+
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,40 C240,90 480,0 720,30 C960,60 1200,10 1440,50 L1440,100 L0,100 Z" fill="var(--background)"></path>
+      </svg>
     </div>
   </section>
 
@@ -447,6 +511,13 @@ footer {
 
   <!-- 05 — CÓDIGO DE VESTIMENTA -->
   <section id="vestimenta" class="reveal">
+    <svg class="corner-leaf" viewBox="0 0 60 60" aria-hidden="true">
+      <path d="M12 48 Q28 32 46 12" fill="none"/>
+      <g transform="translate(18,40) rotate(-30) scale(0.28)"><path d="M0,-58 C8,-78 8,-96 0,-112 C-8,-96 -8,-78 0,-58 Z"/></g>
+      <g transform="translate(28,28) rotate(10) scale(0.3)"><path d="M0,-58 C8,-78 8,-96 0,-112 C-8,-96 -8,-78 0,-58 Z"/></g>
+      <g transform="translate(38,16) rotate(-50) scale(0.26)"><path d="M0,-58 C8,-78 8,-96 0,-112 C-8,-96 -8,-78 0,-58 Z"/></g>
+    </svg>
+
     <div class="section-inner">
 
       <h2 class="center">Código de vestimenta</h2>
@@ -478,7 +549,7 @@ footer {
         <div class="dress-col">
           <h3>Hombres</h3>
           <ul>
-            <li>Camisa blanca de lino</li>
+            <li>Camisa blanca</li>
             <li>Pantalón beige</li>
           </ul>
         </div>
@@ -486,10 +557,23 @@ footer {
       </div>
 
     </div>
-  </section>
+
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,40 C240,90 480,0 720,30 C960,60 1200,10 1440,50 L1440,100 L0,100 Z" fill="var(--background-alt)"></path>
+      </svg>
+    </div>
+</section>
 
   <!-- 06 — INFORMACIÓN IMPORTANTE -->
   <section id="informacion" class="reveal" style="background:var(--background-alt);">
+    <svg class="corner-leaf corner-leaf--left corner-leaf--bottom" viewBox="0 0 60 60" aria-hidden="true">
+      <path d="M12 48 Q28 32 46 12" fill="none"/>
+      <g transform="translate(18,40) rotate(-30) scale(0.28)"><path d="M0,-58 C8,-78 8,-96 0,-112 C-8,-96 -8,-78 0,-58 Z"/></g>
+      <g transform="translate(28,28) rotate(10) scale(0.3)"><path d="M0,-58 C8,-78 8,-96 0,-112 C-8,-96 -8,-78 0,-58 Z"/></g>
+      <g transform="translate(38,16) rotate(-50) scale(0.26)"><path d="M0,-58 C8,-78 8,-96 0,-112 C-8,-96 -8,-78 0,-58 Z"/></g>
+    </svg>
+
     <div class="section-inner">
       <h2 class="center" style="margin-bottom:2.5rem;">Información importante</h2>
       <div class="info-list">
@@ -516,6 +600,12 @@ footer {
         </div>
       </div>
     </div>
+
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,40 C240,90 480,0 720,30 C960,60 1200,10 1440,50 L1440,100 L0,100 Z" fill="var(--background)"></path>
+      </svg>
+    </div>
   </section>
 
   <!-- 07 — MÚSICA + LLUVIA DE SOBRES -->
@@ -540,12 +630,22 @@ footer {
 
   <!-- 08 — MOMENTOS + CIERRE -->
   <section id="momentos" class="reveal">
-    <div class="section-inner">
-      <!-- <h2 class="center" style="margin-bottom:2rem;">Algunos momentos de nosotros</h2>
-      <div class="gallery-grid">
-        <div class="photo-placeholder">Foto / ilustración 1</div>
-        <div class="photo-placeholder">Foto / ilustración 2</div>
-      </div> -->
+    <div class="hero-landscape" aria-hidden="true">
+      <svg viewBox="0 0 1440 400" preserveAspectRatio="none">
+        <path d="M0,400 L0,260 C200,200 350,280 500,230 C650,180 800,260 950,220 C1100,180 1250,240 1440,200 L1440,400 Z" fill="var(--blue-soft)" opacity="0.35"/>
+        <path d="M0,400 L0,310 C220,270 380,330 560,300 C740,270 900,330 1080,300 C1220,280 1340,310 1440,290 L1440,400 Z" fill="var(--blue-primary)" opacity="0.3"/>
+        <path d="M0,400 L0,350 C300,330 700,370 1000,340 C1200,320 1340,350 1440,335 L1440,400 Z" fill="var(--blue-deep)"/>
+      </svg>
+    </div>
+
+    <svg class="corner-leaf" viewBox="0 0 60 60" aria-hidden="true">
+      <path d="M12 48 Q28 32 46 12" fill="none"/>
+      <g transform="translate(18,40) rotate(-30) scale(0.28)"><path d="M0,-58 C8,-78 8,-96 0,-112 C-8,-96 -8,-78 0,-58 Z"/></g>
+      <g transform="translate(28,28) rotate(10) scale(0.3)"><path d="M0,-58 C8,-78 8,-96 0,-112 C-8,-96 -8,-78 0,-58 Z"/></g>
+      <g transform="translate(38,16) rotate(-50) scale(0.26)"><path d="M0,-58 C8,-78 8,-96 0,-112 C-8,-96 -8,-78 0,-58 Z"/></g>
+    </svg>
+
+    <div class="hero-content section-inner">
       <div class="divider">
         <svg width="20" height="20" viewBox="0 0 24 24" class="icon"><path d="M12 21s-7.5-4.6-10-9.3C.6 8.1 2 4.5 5.4 4c2-.3 3.7.7 4.6 2.2C10.9 4.7 12.6 3.7 14.6 4c3.4.5 4.8 4.1 3.4 7.7C15.5 16.4 12 21 12 21Z"/></svg>
       </div>
@@ -617,7 +717,7 @@ footer {
   // 1. Agrega aquí cada invitado con su código único.
   // 2. Comparte el link como: tu-dominio.com/?i=ABC123
   const guests = {
-    "G00": { name: "César y Zully", seats: 2, greeting: "Familia Calderon Diaz, nos encantaría compartir este día con ustedes." },
+    "G00": { name: "Familia Calderon Diaz", seats: 2, greeting: "Familia Calderon Diaz, nos encantaría compartir este día con ustedes." },
     "G01": { name: "Familia Diaz Lara", seats: 5, greeting: "Familia Diaz Lara, nos encantaría compartir este día con ustedes." },
     "G02": { name: "Familia Monterroza Diaz", seats: 2, greeting: "Familia Monterroza Diaz, nos encantaría compartir este día con ustedes." },
     "G03": { name: "Familia Rivero", seats: 3, greeting: "Familia Rivero, nos encantaría compartir este día con ustedes." },
