@@ -359,6 +359,7 @@ footer {
   <!-- 01 — HERO -->
   <section id="hero" class="reveal">
     <span class="display-xl">César <em>&amp;</em> Zully</span>
+    <p class="hero-greeting" id="heroGreeting">Nos encantaría compartir este día contigo.</p>
     <div class="hero-meta">
       <span>Nos casamos</span>
       <span class="hero-date">14 de noviembre de 2026 · 5:30 PM</span>
@@ -371,9 +372,8 @@ footer {
     <div class="section-inner card">
       <h2>¿Nos acompañas?</h2>
       <p class="center" style="margin:0 auto 1rem;">Estamos muy felices de compartir este día contigo.</p>
-      <p class="seats">Hemos reservado <strong>X</strong> lugares para esta celebración.</p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfNix8wa4HY1BFsxWDJkT_h3bRk5N0mOSIoMMk3ZN9TSIPFig/viewform?usp=publish-editor" class="btn btn-primary">Confirmar asistencia</a>
-      <!-- <div><span class="placeholder-note">Placeholder — se conecta al Google Form en la Entrega 3</span></div> -->
+      <p class="seats" id="rsvpSeats">Hemos reservado <strong>X</strong> lugares para esta celebración.</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfNix8wa4HY1BFsxWDJkT_h3bRk5N0mOSIoMMk3ZN9TSIPFig/viewform?usp=publish-editor" class="btn btn-primary" id="rsvpButton">Confirmar asistencia</a>
     </div>
   </section>
 
@@ -611,6 +611,94 @@ footer {
   }
   updateCountdown();
   const timer = setInterval(updateCountdown, 1000);
+
+  // Personalización por invitado vía URL (?i=CODIGO)
+  // -------------------------------------------------
+  // 1. Agrega aquí cada invitado con su código único.
+  // 2. Comparte el link como: tu-dominio.com/?i=ABC123
+  const guests = {
+    "G00": { name: "César y Zully", seats: 2, greeting: "Familia Calderon Diaz, nos encantaría compartir este día con ustedes." },
+    "G01": { name: "Familia Diaz Lara", seats: 5, greeting: "Familia Diaz Lara, nos encantaría compartir este día con ustedes." },
+    "G02": { name: "Familia Monterroza Diaz", seats: 2, greeting: "Familia Monterroza Diaz, nos encantaría compartir este día con ustedes." },
+    "G03": { name: "Familia Rivero", seats: 3, greeting: "Familia Rivero, nos encantaría compartir este día con ustedes." },
+    "G04": { name: "Alvaro", seats: 1, greeting: "Alvaro, nos encantaría compartir este día contigo." },
+    "G05": { name: "Paula", seats: 2, greeting: "Paula, hemos reservado 2 cupos para ti." },
+    "G06": { name: "Abuelo", seats: 1, greeting: "Abuelo, nos encantaría compartir este día contigo." },
+    "G07": { name: "Familia Arrieta Armesto", seats: 2, greeting: "Familia Arrieta Armesto, nos encantaría compartir este día con ustedes." },
+    "G08": { name: "Familia Bandas Arrieta", seats: 2, greeting: "Familia Bandas Arrieta, nos encantaría compartir este día con ustedes." },
+    "G09": { name: "Paola", seats: 2, greeting: "Paola, hemos reservado 2 cupos para ti." },
+    "G10": { name: "Familia Arrieta Hernández", seats: 2, greeting: "Familia Arrieta Hernández, nos encantaría compartir este día con ustedes." },
+    "G11": { name: "Ana", seats: 1, greeting: "Ana, nos encantaría compartir este día contigo." },
+    "G12": { name: "Familia Madera Meza", seats: 3, greeting: "Familia Madera Meza, nos encantaría compartir este día con ustedes." },
+    "G13": { name: "Abuela Maria", seats: 1, greeting: "Abuela Maria, nos encantaría compartir este día contigo." },
+    "G14": { name: "Mirtha", seats: 2, greeting: "Mirtha, hemos reservado 2 cupos para ti." },
+    "G15": { name: "Ana", seats: 2, greeting: "Ana, hemos reservado 2 cupos para ti." },
+    "G16": { name: "Yoli", seats: 2, greeting: "Yoli, hemos reservado 2 cupos para ti." },
+    "G17": { name: "Luz Dary", seats: 2, greeting: "Luz Dary, hemos reservado 2 cupos para ti." },
+    "G18": { name: "Andrea", seats: 1, greeting: "Andrea, nos encantaría compartir este día contigo." },
+    "G19": { name: "Karolay", seats: 1, greeting: "Karolay, nos encantaría compartir este día contigo." },
+    "G20": { name: "Vanesa", seats: 1, greeting: "Vanesa, nos encantaría compartir este día contigo." },
+    "G21": { name: "Tania", seats: 1, greeting: "Tania, nos encantaría compartir este día contigo." },
+    "G22": { name: "Eliza", seats: 2, greeting: "Eliza, hemos reservado 2 cupos para ti." },
+    "G23": { name: "María Camila", seats: 2, greeting: "María Camila, hemos reservado 2 cupos para ti." },
+    "G24": { name: "Familia Jaraba Alvarez", seats: 2, greeting: "Familia Jaraba Alvarez, nos encantaría compartir este día con ustedes." },
+    "G25": { name: "Delcy", seats: 1, greeting: "Delcy, nos encantaría compartir este día contigo." },
+    "G26": { name: "Familia Jaraba Tuiran", seats: 3, greeting: "Familia Jaraba Tuiran, nos encantaría compartir este día con ustedes." },
+    "G27": { name: "Familia Jaraba Lopez", seats: 2, greeting: "Familia Jaraba Lopez, nos encantaría compartir este día con ustedes." },
+    "G28": { name: "Familia Calderon Orozco", seats: 4, greeting: "Familia Calderon Orozco, nos encantaría compartir este día con ustedes." },
+    "G29": { name: "Familia Dominguez Orozco", seats: 2, greeting: "Familia Dominguez Orozco, nos encantaría compartir este día con ustedes." },
+    "G30": { name: "Familia Orozco Martinez", seats: 3, greeting: "Familia Orozco Martinez, nos encantaría compartir este día con ustedes." },
+    "G31": { name: "Familia Orozco Calderon", seats: 4, greeting: "Familia Orozco Calderon, nos encantaría compartir este día con ustedes." },
+    "G32": { name: "Familia Mendez Calderon", seats: 3, greeting: "Familia Mendez Calderon, nos encantaría compartir este día con ustedes." },
+    "G33": { name: "Edinso", seats: 2, greeting: "Edinso, hemos reservado 2 cupos para ti." },
+    "G34": { name: "Leidy", seats: 2, greeting: "Leidy, hemos reservado 2 cupos para ustedes." },
+    "G35": { name: "Familia Garcia Orozco", seats: 3, greeting: "Familia Garcia Orozco, nos encantaría compartir este día con ustedes." },
+    "G36": { name: "Andrew", seats: 2, greeting: "Andrew, hemos reservado 2 cupos para ustedes." },
+    "G37": { name: "Kennit", seats: 1, greeting: "Kennit, nos encantaría compartir este día contigo." },
+    "G38": { name: "Leonardo", seats: 1, greeting: "Leonardo, nos encantaría compartir este día contigo." },
+    "G39": { name: "Marcela", seats: 1, greeting: "Marcela, nos encantaría compartir este día contigo." },
+    "G40": { name: "María Camila U", seats: 1, greeting: "María Camila, nos encantaría compartir este día contigo." },
+    "G41": { name: "María Paula", seats: 1, greeting: "María Paula, nos encantaría compartir este día contigo." },
+    "G42": { name: "Familia Herazo Lopez", seats: 3, greeting: "Familia Herazo Lopez, nos encantaría compartir este día con ustedes." },
+    "G43": { name: "Nestor", seats: 2, greeting: "Nestor, hemos reservado 2 cupos para ti." },
+    "G44": { name: "Guillermo Orozco", seats: 1, greeting: "Guillermo Orozco, nos encantaría compartir este día contigo." },
+    "G45": { name: "Familia Daza", seats: 3, greeting: "Familia Daza, nos encantaría compartir este día con ustedes." },
+    "G46": { name: "Tio Jarol", seats: 1, greeting: "Tio Jarol, nos encantaría compartir este día contigo." },
+    "G47": { name: "Familia Herazo", seats: 4, greeting: "Familia Herazo, nos encantaría compartir este día con ustedes." },
+    "G48": { name: "Emilse", seats: 2, greeting: "Emilse, hemos reservado 2 cupos para ti." },
+    "G49": { name: "Miriam Arrieta", seats: 1, greeting: "Miriam Arrieta, nos encantaría compartir este día contigo." },
+    "G50": { name: "Luz Dary Sola", seats: 2, greeting: "Luz Dary, hemos reservado 2 cupos para ti." },
+    "G51": { name: "Tony Sierra", seats: 1, greeting: "Tony Sierra, nos encantaría compartir este día contigo." },
+    "G52": { name: "Allison Puerta", seats: 1, greeting: "Allison Puerta, nos encantaría compartir este día contigo." },
+    "G53": { name: "Hilda Oyola", seats: 1, greeting: "Hilda Oyola, nos encantaría compartir este día contigo." },
+    "G54": { name: "Jose David", seats: 1, greeting: "Jose David, nos encantaría compartir este día contigo." }
+  };
+ 
+  // Cuando tengamos la URL real del Google Form, se arma aquí:
+  const RSVP_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfNix8wa4HY1BFsxWDJkT_h3bRk5N0mOSIoMMk3ZN9TSIPFig/viewform?usp=publish-editor";
+  const RSVP_NAME_ENTRY = "entry.641573948"; // id del campo "Nombre" del Form
+  const RSVP_SEATS_ENTRY = "entry.7612046"; // reemplaza por el ID real del campo "Número de personas"
+ 
+  const params = new URLSearchParams(window.location.search);
+  const code = (params.get('i') || '').trim().toUpperCase();
+  const guest = guests[code];
+ 
+  const heroGreeting = document.getElementById('heroGreeting');
+  const rsvpSeats = document.getElementById('rsvpSeats');
+  const rsvpButton = document.getElementById('rsvpButton');
+ 
+  if (guest) {
+    heroGreeting.textContent = guest.greeting;
+    const palabraLugar = guest.seats === 1 ? 'lugar' : 'lugares';
+    rsvpSeats.innerHTML = `Hemos reservado <strong>${guest.seats}</strong> ${palabraLugar} para <strong>${guest.name}</strong>.`;
+ 
+    // Cuando esté RSVP_FORM_URL definida, descomentar para precargar el nombre:
+    rsvpButton.href = `${RSVP_FORM_URL}&${RSVP_NAME_ENTRY}=${encodeURIComponent(guest.name)}&${RSVP_SEATS_ENTRY}=${guest.seats}`;
+    } else {
+    // Fallback: alguien abre el link sin código o con uno inválido.
+    heroGreeting.textContent = 'Nos encantaría compartir este día contigo.';
+    rsvpSeats.textContent = 'Escríbenos para confirmar cuántos lugares tenemos reservados para ti.';
+  }
 </script>
 
 </body>
