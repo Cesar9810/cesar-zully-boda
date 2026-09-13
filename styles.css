@@ -1,0 +1,197 @@
+/* ============================================
+   César & Zully — Sistema de diseño
+   Tokens y componentes base reutilizables.
+   Este archivo es la base de css/styles.css
+   para la invitación completa.
+   ============================================ */
+
+:root {
+  /* Paleta — definida en el brief original */
+  --blue-primary: #91A9CF;
+  --blue-light: #A1D2FA;
+  --blue-soft: #BAD5F2;
+  --background: #F8FBFF;
+  --background-alt: #F1F6FC;
+  --text-primary: #26364A;
+  --text-secondary: #5E7088;
+  --white: #FFFFFF;
+  --border: rgba(145, 169, 207, 0.35);
+
+  /* Extensión necesaria: un azul más profundo para
+     que los botones cumplan contraste accesible
+     (blue-primary es demasiado claro para texto blanco). */
+  --blue-deep: #48658A;
+  --blue-deep-hover: #395171;
+
+  /* Sombra, radio, tipografía */
+  --shadow: 0 10px 30px rgba(38, 54, 74, 0.10);
+  --shadow-soft: 0 4px 16px rgba(38, 54, 74, 0.06);
+  --radius: 18px;
+  --radius-pill: 999px;
+  --font-title: "Cormorant Garamond", serif;
+  --font-body: "Montserrat", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Tipografía ---------- */
+
+.display-xl {
+  font-family: var(--font-title);
+  font-weight: 500;
+  font-size: clamp(2.75rem, 6vw, 4.75rem);
+  line-height: 1.05;
+  letter-spacing: 0.005em;
+  margin: 0;
+}
+
+.display-xl em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--blue-deep);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-title);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 0.5em;
+}
+
+h2 { font-size: clamp(1.6rem, 3vw, 2.15rem); }
+h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); }
+
+p {
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 60ch;
+  margin: 0 0 1em;
+}
+
+.quote {
+  font-family: var(--font-title);
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.4vw, 1.55rem);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.label-small {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  color: var(--text-secondary);
+  text-transform: none;
+}
+
+/* ---------- Botones ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.9rem 1.85rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.25s ease, color 0.25s ease,
+              border-color 0.25s ease, transform 0.15s ease;
+}
+
+.btn:active { transform: scale(0.98); }
+
+.btn:focus-visible {
+  outline: 2px solid var(--blue-deep);
+  outline-offset: 3px;
+}
+
+.btn-primary {
+  background: var(--blue-deep);
+  color: var(--white);
+}
+.btn-primary:hover { background: var(--blue-deep-hover); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--blue-deep);
+  border-color: var(--blue-primary);
+}
+.btn-secondary:hover { background: var(--background-alt); }
+
+.btn-ghost {
+  background: none;
+  color: var(--text-primary);
+  padding: 0.4rem 0;
+  border-radius: 0;
+  border-bottom: 1px solid var(--border);
+}
+.btn-ghost:hover { border-color: var(--blue-deep); color: var(--blue-deep); }
+
+/* ---------- Tarjetas ---------- */
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  padding: 2rem;
+}
+
+/* ---------- Separador ornamental ---------- */
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  margin: 2.5rem 0;
+  color: var(--blue-primary);
+}
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  max-width: 140px;
+}
+
+/* ---------- Iconos ---------- */
+
+.icon {
+  width: 28px;
+  height: 28px;
+  stroke: var(--blue-deep);
+  fill: none;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- Animación de aparición ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

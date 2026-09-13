@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>César & Zully — Sistema de diseño</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .page {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 6rem;
+  }
+  .intro {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .intro .label-small { display:block; margin-bottom: 1rem; }
+  .block { margin-bottom: 4.5rem; }
+  .block-head { margin-bottom: 1.5rem; }
+  .block-head .label-small { display:block; margin-top: 0.35rem; }
+  .note {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 0.75rem;
+    font-style: italic;
+  }
+
+  /* Paleta */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+  .swatch {
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--white);
+  }
+  .swatch-color { height: 80px; }
+  .swatch-info { padding: 0.85rem 1rem; }
+  .swatch-info .name { font-size: 0.85rem; font-weight: 500; }
+  .swatch-info .hex { font-size: 0.78rem; color: var(--text-secondary); }
+
+  /* Tipografia */
+  .type-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .type-row:last-child { border-bottom: none; }
+  .type-row .tag {
+    width: 90px;
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.03em;
+  }
+
+  /* Botones */
+  .btn-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+
+  /* Tarjetas demo */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .card-demo .icon { margin-bottom: 0.75rem; }
+
+  /* Iconos */
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 1.5rem;
+    text-align: center;
+  }
+  .icon-grid .icon { margin: 0 auto 0.5rem; }
+  .icon-grid span { font-size: 0.78rem; color: var(--text-secondary); }
+
+  /* Fondo alterno para mostrar contraste */
+  .alt-bg {
+    background: var(--background-alt);
+    border-radius: var(--radius);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="intro reveal">
+    <span class="label-small">Sistema de diseño — Entrega 1</span>
+    <h1 class="display-xl">César <em>&</em> Zully</h1>
+    <p style="margin: 1rem auto 0; text-align:center;">
+      Paleta, tipografía y componentes base para la invitación digital.
+      Esta página no es la invitación final — es la referencia visual que,
+      una vez aprobada, se extiende a las ocho secciones.
+    </p>
+  </div>
+
+  <!-- COLOR -->
+  <section class="block reveal">
+    <div class="block-head">
+      <h2>Color</h2>
+      <span class="label-small">Paleta azul definida en el brief, más un tono profundo para botones accesibles</span>
+    </div>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--blue-primary)"></div>
+        <div class="swatch-info"><div class="name">Azul principal</div><div class="hex">#91A9CF</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--blue-light)"></div>
+        <div class="swatch-info"><div class="name">Azul claro</div><div class="hex">#A1D2FA</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--blue-soft)"></div>
+        <div class="swatch-info"><div class="name">Azul suave</div><div class="hex">#BAD5F2</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--blue-deep)"></div>
+        <div class="swatch-info"><div class="name">Azul profundo <span style="opacity:.6">(nuevo)</span></div><div class="hex">#48658A</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--background)"></div>
+        <div class="swatch-info"><div class="name">Fondo</div><div class="hex">#F8FBFF</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--background-alt)"></div>
+        <div class="swatch-info"><div class="name">Fondo alterno</div><div class="hex">#F1F6FC</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--text-primary)"></div>
+        <div class="swatch-info"><div class="name">Texto principal</div><div class="hex">#26364A</div></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:var(--text-secondary)"></div>
+        <div class="swatch-info"><div class="name">Texto secundario</div><div class="hex">#5E7088</div></div>
+      </div>
+    </div>
+    <p class="note">Nota: el azul principal (#91A9CF) es demasiado claro para texto blanco encima —
+      no pasa contraste accesible. Por eso sumé "azul profundo" (#48658A), solo para botones y
+      elementos que necesiten texto blanco legible. La paleta sigue leyéndose 100% azul.</p>
+  </section>
+
+  <!-- TIPOGRAFÍA -->
+  <section class="block reveal">
+    <div class="block-head">
+      <h2>Tipografía</h2>
+      <span class="label-small">Cormorant Garamond para momentos emocionales, Montserrat para todo lo funcional</span>
+    </div>
+    <div class="type-row">
+      <span class="tag">Nombres</span>
+      <span class="display-xl" style="font-size:2.75rem;">César <em>&</em> Zully</span>
+    </div>
+    <div class="type-row">
+      <span class="tag">Título H2</span>
+      <h2 style="margin:0;">Nuestra historia</h2>
+    </div>
+    <div class="type-row">
+      <span class="tag">Cita</span>
+      <p class="quote" style="margin:0;">Es mejor ser dos que uno, porque ambos pueden ayudarse a lograr el éxito.</p>
+    </div>
+    <div class="type-row">
+      <span class="tag">Cuerpo</span>
+      <p style="margin:0;">Nos conocimos hace algunos años y desde entonces construimos, poco a poco, una historia que hoy queremos compartir con las personas que más queremos.</p>
+    </div>
+    <div class="type-row">
+      <span class="tag">Detalle</span>
+      <span class="label-small">14 de noviembre de 2026 · Sincelejo, Sucre</span>
+    </div>
+    <p class="note">Nota: cambié las mayúsculas sostenidas del borrador ("NUESTRA HISTORIA", "EL GRAN DÍA")
+      por texto en formato oración. Se lee igual de elegante, pero más cálido y menos "plantilla corporativa" —
+      si prefieren mantener las mayúsculas, es un cambio de una línea.</p>
+  </section>
+
+  <!-- BOTONES -->
+  <section class="block reveal">
+    <div class="block-head">
+      <h2>Botones</h2>
+      <span class="label-small">Texto en frase natural, no en mayúsculas — misma lógica que la tipografía</span>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary">Confirmar asistencia</button>
+      <button class="btn btn-secondary">Cómo llegar</button>
+      <a href="#" class="btn btn-ghost">Recomendar una canción</a>
+    </div>
+  </section>
+
+  <!-- TARJETAS -->
+  <section class="block reveal">
+    <div class="block-head">
+      <h2>Tarjetas</h2>
+      <span class="label-small">Mismo componente base para RSVP, información y música</span>
+    </div>
+    <div class="card-grid">
+      <div class="card card-demo">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.6 8.1 2 4.5 5.4 4c2-.3 3.7.7 4.6 2.2C10.9 4.7 12.6 3.7 14.6 4c3.4.5 4.8 4.1 3.4 7.7C15.5 16.4 12 21 12 21Z"/></svg>
+        <h3 style="margin-bottom:.4rem;">¿Nos acompañas?</h3>
+        <p style="margin-bottom:1.2rem;">Estamos muy felices de compartir este día contigo.</p>
+        <button class="btn btn-primary">Confirmar asistencia</button>
+      </div>
+      <div class="card card-demo">
+        <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+        <h3 style="margin-bottom:.4rem;">El gran día</h3>
+        <p style="margin-bottom:0;">14 de noviembre, 2026 · 5:30 PM<br>Finca Bella Vista, Sincelejo</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEPARADOR -->
+  <section class="block reveal">
+    <div class="block-head">
+      <h2>Separador</h2>
+      <span class="label-small">Para marcar pausas entre secciones sin usar una línea genérica</span>
+    </div>
+    <div class="divider">
+      <svg width="22" height="22" viewBox="0 0 24 24" class="icon"><path d="M12 3c0 5-3 6-3 10a3 3 0 0 0 6 0c0-4-3-5-3-10Z"/><path d="M12 13v8"/></svg>
+    </div>
+  </section>
+
+  <!-- ICONOS -->
+  <section class="block reveal">
+    <div class="block-head">
+      <h2>Iconos</h2>
+      <span class="label-small">Set de línea, mismo trazo que la tipografía: fino y sin relleno</span>
+    </div>
+    <div class="icon-grid">
+      <div>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.6 8.1 2 4.5 5.4 4c2-.3 3.7.7 4.6 2.2C10.9 4.7 12.6 3.7 14.6 4c3.4.5 4.8 4.1 3.4 7.7C15.5 16.4 12 21 12 21Z"/></svg>
+        <span>Amor</span>
+      </div>
+      <div>
+        <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+        <span>Fecha</span>
+      </div>
+      <div>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.2"/></svg>
+        <span>Lugar</span>
+      </div>
+      <div>
+        <svg class="icon" viewBox="0 0 24 24"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg>
+        <span>Música</span>
+      </div>
+      <div>
+        <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="12" rx="2"/><path d="M12 9V5m-4 0h8l-1.5-2h-5L8 5Z"/><circle cx="12" cy="15" r="3.2"/></svg>
+        <span>Fotos</span>
+      </div>
+      <div>
+        <svg class="icon" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="1.5"/><path d="M2 9h20M12 9v11M12 9C10 5 5.5 5.5 6 8s3 1 6 1Zm0 0c2-4 6.5-3.5 6 -1s-3 1-6 1Z"/></svg>
+        <span>Regalo</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANIMACIÓN -->
+  <section class="block">
+    <div class="block-head">
+      <h2>Animación</h2>
+      <span class="label-small">Un único gesto de aparición al hacer scroll, no una por cada elemento</span>
+    </div>
+    <div class="alt-bg reveal">
+      <p style="max-width:none; color:var(--text-primary);">
+        Este bloque aparece suavemente cuando entra en pantalla — así se verán
+        los títulos y tarjetas en la invitación real. Respeta
+        <code>prefers-reduced-motion</code> para quienes lo tengan activado.
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
